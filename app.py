@@ -23,6 +23,13 @@ def predict():
 		vect = cv.transform(data).toarray()
 		my_prediction = clf.predict(vect)
 	return render_template('result.html',prediction = my_prediction)
+@app.route('/predict_api',methods=['POST'])
+def predict_api():
+    data = request.get_json(force=True)
+    
+    prediction = model.predict([np.array(list(data.values()))])
+    output = prediction[0]
+    return jsonify(output)
 
 if __name__ == "__main__":
     app.run(debug=True)
