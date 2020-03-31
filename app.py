@@ -31,7 +31,7 @@ def predict_api():
     review=request.args['rev']
     data=[review]
     vect=cv.transform(data).toarray()
-    my_prediction = clf.predict(vect)
+    my_prediction = clf.predict(vect).tolist()
     return jsonify({"prediction":my_prediction})
 
 #api.add_resource(home,'/')
