@@ -1,5 +1,6 @@
 from flask import Flask,render_template,url_for,request
-import pandas as pd 
+import pandas as pd
+from logging import FileHandler , WARNING
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -10,6 +11,8 @@ filename = 'nlpaa2.pkl'
 clf = pickle.load(open(filename, 'rb'))
 cv=pickle.load(open('transform.pkl','rb'))
 app = Flask(__name__)
+fh=FileHandler('errorlog.txt')
+fh.setLevel(WARNING)
 
 @app.route('/')
 def home():
